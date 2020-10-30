@@ -1,0 +1,29 @@
+{
+  "configurations" : [
+    {
+      "id" : "00BBE6A5-3283-491D-977D-3B38D80BEE70",
+      "name" : "Configuration 1",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+    "codeCoverage" : false,
+    "targetForVariableExpansion" : {
+      "containerPath" : "container:inspire.xcodeproj",
+      "identifier" : "C3F2E58D254BDE6700B1A183",
+      "name" : "inspire"
+    }
+  },
+  "testTargets" : [
+    {
+      "target" : {
+        "containerPath" : "container:inspire.xcodeproj",
+        "identifier" : "C3F2E59E254BDE6800B1A183",
+        "name" : "inspireTests"
+      }
+    }
+  ],
+  "version" : 1
+}
