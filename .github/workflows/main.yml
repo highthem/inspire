@@ -11,31 +11,24 @@ on:
     branches: [ main ]
 
 env:
-  ARTIFACTS_PATH: "./artifacts"
+  IPHONE_SIMULATOR: "platform=iOS Simulator,name=iPhone 11"
+  IPAD_SIMULATOR: "platform=iOS Simulator,name=iPad Air (4th generation)"
+
 jobs:
-  build:
+  build_test_iphone:
     runs-on: macos-latest
     steps:
       - name: checkout sources
         uses: actions/checkout@v2
 
-      - name: build app
-        run: xcodebuild -quiet -scheme inspire -configuration Debug -destination "platform=iOS Simulator" -derivedDataPath $ARTIFACTS_PATH
-        
-      - name: upload derived data
-        uses: actions/upload-artifact@v2
-        with:
-          name: derived_data
-          path: $ARTIFACTS_PATH
+      - name: build app and test
+        run: xcodebuild -quiet -scheme inspire -configuration Debug -destination "$IPHONE_SIMULATOR" test
 
-  test:
+  build_test_ipad:
     runs-on: macos-latest
-    needs: [build]
     steps:
-      - name: get data
-        uses: actions/download-artifact@v2
-        with:
-          name: derived_data
-      
+      - name: checkout sources
+        uses: actions/checkout@v2
+
       - name: testing
-        run: xcodebuild -quiet -scheme inspire -configuration Debug -destination "name=iPhone 12" -derivedDataPath $ARTIFACTS_PATH test
+        run: xcodebuild -quiet -scheme inspire -configuration Debug -destination "$IPAD_SIMULATOR" test
